@@ -5,7 +5,7 @@ The goal is to create a system that uses deep learning to detect whether or not 
 
 Risky sites include areas with still water, for example: water tanks, plant pots, empty bottles and other recipients, car tires, rubble areas. 
 
-### Author Description
+### Author
 Bruno Gabriel Cavalcante Lima, <bgcl@ic.ufal.br>
 
 ### Folder contents:
