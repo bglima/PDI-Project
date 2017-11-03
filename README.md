@@ -1,4 +1,4 @@
-## Image and Analysis for Detection of Risky Mosquitoes Breeding Sites
+## Image Analysis for Detection of Potential Mosquitoes Breeding Sites
 
 ### Abstract
 The goal is to create a system that uses deep learning to detect whether or not a specific image contains potencial sites for mosquitoes reproduction. This can be applied for preventing diseases spread such as Dengue or Zika. 
