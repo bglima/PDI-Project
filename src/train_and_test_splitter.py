@@ -11,6 +11,7 @@ import os
 from random import shuffle
 from math import floor
 import argparse
+from shutil import copyfile
 
 #%%
 
@@ -46,10 +47,24 @@ def save_results(training_set, test_set, data_dir):
     ## Name files in crescent order   
     for img_name in training_set:
         im = cv2.imread(data_dir + '/' + img_name)
-        cv2.imwrite(train_dir + img_name, im)        
+        cv2.imwrite(train_dir + img_name, im)      
+        
+        xmlPath = os.path.splitext(data_dir + '/' + img_name)[0] + '.xml'
+        newXmlPath = train_dir + os.path.splitext(img_name)[0]  + '.xml'
+        if( not os.path.exists(xmlPath) ):    #Copy XML if exists
+            continue       
+        copyfile(xmlPath, newXmlPath )
+        
+        
     for img_name in test_set:
         im = cv2.imread(data_dir + '/' + img_name)
         cv2.imwrite(test_dir + img_name, im)        
+        
+        xmlPath = os.path.splitext(data_dir + '/' + img_name)[0] + '.xml'
+        newXmlPath = test_dir + os.path.splitext(img_name)[0]  + '.xml'
+        if( not os.path.exists(xmlPath) ):    #Copy XML if exists
+            continue       
+        copyfile(xmlPath, newXmlPath )
     return
     
 #%%
@@ -61,6 +76,13 @@ ap.add_argument("-p", "--path", required=True,
 ap.add_argument("-s", "--split", type=float, default=0.7,
 	help="Percentage to split data. Default is 0.7 for training and 0.3 for test") 
 args = vars(ap.parse_args())
+
+#%%
+args = {}
+args["path"] = '../db/tire'
+args["split"] = 0.7
+
+#%%
 
 imgs_dir = args["path"]
 split = args["split"]
