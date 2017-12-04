@@ -1,0 +1,26 @@
+<annotation>
+	<folder>tire</folder>
+	<filename>36.jpg</filename>
+	<path>C:\Users\Bruno\git\pdi-project\db\tire\36.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>728</width>
+		<height>485</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>tire</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>98</xmin>
+			<ymin>54</ymin>
+			<xmax>698</xmax>
+			<ymax>460</ymax>
+		</bndbox>
+	</object>
+</annotation>
