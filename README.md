@@ -33,7 +33,7 @@ The goal of the project is to train a object detection system using TensorFlow. 
 
 3. To split dataset into training_set and test_set folders, we have this [train_and_test_splitter.py](https://github.com/bglima/PDI-Project/blob/master/src/train_and_test_splitter.py). It shuffles the data and divide into two folders, with the fraction you specify for training.
 
-4. The .xml files can be converted to .csv, and then to .record using the scripts present in (Racoon Object Detection)[https://github.com/datitran/raccoon_dataset] repository.
+4. The .xml files can be converted to .csv, and then to .record using the scripts present in [Racoon Object Detection](https://github.com/datitran/raccoon_dataset) repository.
 
 5. In order to train your network, you first need to have its configuration. 
 Configuration samples: [here](https://github.com/tensorflow/models/tree/master/research/object_detection/samples/configs). Also, if you choose to use a pre-existing model, you can use some pre-trained checkpoints and its features. Pre-trained models: [here](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md). 
