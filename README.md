@@ -51,6 +51,12 @@ We are currently testing MobileNet model.
 
 ### References
 
+[Pre-trained object-detect model checkpoints](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md)
+
+[Samples for object-detect configuration files](https://github.com/tensorflow/models/tree/master/research/object_detection/samples/configs)
+
+[Samples for object-detect class labels](https://github.com/tensorflow/models/tree/master/research/object_detection/data)
+
 [How to train your own Object Detector with TensorFlow’s Object Detector API](https://towardsdatascience.com/how-to-train-your-own-object-detector-with-tensorflows-object-detector-api-bec72ecfe1d9)
 
 [Understanding SSD MultiBox — Real-Time Object Detection In Deep Learning](https://towardsdatascience.com/understanding-ssd-multibox-real-time-object-detection-in-deep-learning-495ef744fab)
