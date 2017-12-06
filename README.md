@@ -53,7 +53,7 @@ In the configuration samples, you basically need to search for the PATH_TO_BE_CO
 
 We tested SSD MobileNet model, but we got better results with Faster RCNN Resnet COCO 50. 
 
-Configuration files used for the training can be found in [src/training002](https://github.com/bglima/PDI-Project/tree/master/src/training002) Initially we trained with only one class: tire. This way we could learn how the training proccess works. The first results are avaliable in [res/training002_tire_test](https://github.com/bglima/PDI-Project/tree/master/res/training002_tire_test). Image tire_test_01 show images from test_set, while tire_test_02 show new images, now used in training nor test. 
+Configuration files used for the training can be found in [src/training002](https://github.com/bglima/PDI-Project/tree/master/src/training002) Initially we trained with only one class: tire. This way we could learn how the training proccess works. The first results are avaliable in [res/training002_tire_test](https://github.com/bglima/PDI-Project/tree/master/res/training002_tire_test). Image tire_test_01 show images from test_set, while tire_test_02 show new images, not used in training nor test. 
 
 ### Status
 
