@@ -1,0 +1,26 @@
+<annotation>
+	<folder>rubble</folder>
+	<filename>image_081.jpeg</filename>
+	<path>C:\Users\Bruno Lima\Projects\PDI-Project\db\rubble\image_081.jpeg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>280</width>
+		<height>180</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>rubble</name>
+		<pose>Unspecified</pose>
+		<truncated>1</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>17</xmin>
+			<ymin>96</ymin>
+			<xmax>238</xmax>
+			<ymax>180</ymax>
+		</bndbox>
+	</object>
+</annotation>
