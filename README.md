@@ -23,7 +23,8 @@ The goal of the project is to train a object detection system using TensorFlow. 
 3. Divide each class into training and test
 3. Generate the .tfrecord (TensorFlow default extension for dataset).
 4. Choose a network model and configuration
-5. Train the model and test results
+5. Train the model and export the frozen inference graph (.pb file)
+6. Test the results
 
 ### Details for each step
 1. Used two main sources for getting images: GoogleImages and [ImageNet](http://www.image-net.org/). The aim was to group approx. 300 images for each class.
@@ -36,7 +37,10 @@ The goal of the project is to train a object detection system using TensorFlow. 
 4. The .xml files can be converted to .csv, and then to .record using the scripts present in [Racoon Object Detection](https://github.com/datitran/raccoon_dataset) repository.
 
 5. In order to train your network, you first need to have its configuration. 
-Configuration samples: [here](https://github.com/tensorflow/models/tree/master/research/object_detection/samples/configs). Also, if you choose to use a pre-existing model, you can use some pre-trained checkpoints and its features. Pre-trained models: [here](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md). 
+Configuration samples: [here](https://github.com/tensorflow/models/tree/master/research/object_detection/samples/configs). Also, if you choose to use a pre-existing model, you can use some pre-trained checkpoints and its features. Pre-trained models: [here](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md). The goal is to reach a loss that is smaller than 1.
+   After you get to it, you need to export a frozen inference graph. There is [a script](https://github.com/tensorflow/models/blob/master/research/object_detection/export_inference_graph.py) that does this in TensorFlow object detection repository. 
+
+6. In the same repository you can find a [Jupyter Notebook script](https://github.com/tensorflow/models/blob/master/research/object_detection/object_detection_tutorial.ipynb) showing all the necessary steps to test your trained network.
 
 In the configuration samples, you basically need to search for the PATH_TO_BE_CONFIGURED in the .config files. They are:
 * fine_tune_checkpoint - If you are using pre-trained models
@@ -45,9 +49,15 @@ In the configuration samples, you basically need to search for the PATH_TO_BE_CO
 * eval_input_reader (input_path) - Path to test.record
 * eval_input_reader (label_map_path) - Path to the class-labels.pbtxt for your testing model. Can be the same as for train.
 
+### First results
+
+We tested SSD MobileNet model, but we got better results with Faster RCNN Resnet COCO 50. 
+
+Configuration files used for the training can be found in [src/training002](https://github.com/bglima/PDI-Project/tree/master/src/training002) Initially we trained with only one clas: tire. This way we could learn how the training proccess works. The first results are avaliable in [res/training002_tire_test](https://github.com/bglima/PDI-Project/tree/master/res/training002_tire_test).
+
 ### Status
 
-We are currently testing MobileNet model.
+Generating annotations for rubble class.
 
 ### References
 
