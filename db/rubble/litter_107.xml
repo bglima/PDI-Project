@@ -1,0 +1,26 @@
+<annotation>
+	<folder>rubble</folder>
+	<filename>litter_107.jpg</filename>
+	<path>C:\Users\Bruno Lima\Projects\PDI-Project\db\rubble\litter_107.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>500</width>
+		<height>375</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>rubble</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>95</xmin>
+			<ymin>174</ymin>
+			<xmax>365</xmax>
+			<ymax>222</ymax>
+		</bndbox>
+	</object>
+</annotation>
