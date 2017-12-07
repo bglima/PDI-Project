@@ -3,7 +3,7 @@
 ### Abstract
 The goal is to create a system that uses deep learning to detect whether or not a specific image contains potencial sites for mosquitoes reproduction, using object detection. This can be applied for preventing diseases spread such as Dengue or Zika. 
 
-Risky sites include areas with still water, for example: water tanks, plant pots, empty bottles and other recipients, car tires, rubble areas. 
+Risky sites include areas with still water. In this project we will consider: plant pots, empty bottles, car tires, rubble areas. 
 
 ### Author
 Bruno Gabriel Cavalcante Lima, <bgcl@ic.ufal.br>
