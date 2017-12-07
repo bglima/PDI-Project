@@ -13,13 +13,13 @@ import time
 
 # adding path to geckodriver to the OS environment variable
 os.environ["PATH"] += os.pathsep + os.getcwd()
-download_path = "dataset/"
+download_path = "../db/"
 
 def main():
 	#searchtext = sys.argv[1]
 	#num_requested = int(sys.argv[2])
-	searchtext = 'water'
-	num_requested = 100
+	searchtext = 'soda bottle'
+	num_requested = 300
 
 	number_of_scrolls = num_requested / 400 + 1 
 	# number_of_scrolls * 400 images will be opened in the browser

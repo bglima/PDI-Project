@@ -17,7 +17,7 @@ from shutil import copyfile
 
 def get_file_list_from_dir(data_dir):
     all_files = os.listdir(os.path.abspath(data_dir))
-    data_files = list(filter(lambda file: file.endswith(('.jpg', 'jpeg')), all_files))
+    data_files = list(filter(lambda file: file.endswith('.jpg'), all_files))
     return data_files
 
 def randomize_files(file_list):
