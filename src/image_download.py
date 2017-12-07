@@ -13,7 +13,7 @@ import time
 
 # adding path to geckodriver to the OS environment variable
 os.environ["PATH"] += os.pathsep + os.getcwd()
-download_path = "../db/"
+download_path = "dataset/"
 
 def main():
 	#searchtext = sys.argv[1]
