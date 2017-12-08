@@ -1,4 +1,4 @@
-<annotation>
+<annotation verified="yes">
 	<folder>images</folder>
 	<filename>flowerpot_030.jpg</filename>
 	<path>C:\Users\Bruno\git\pdi-project\db\training003\flower_pot\images\flowerpot_030.jpg</path>
@@ -12,7 +12,7 @@
 	</size>
 	<segmented>0</segmented>
 	<object>
-		<name>tire</name>
+		<name>flowerpot</name>
 		<pose>Unspecified</pose>
 		<truncated>0</truncated>
 		<difficult>0</difficult>
