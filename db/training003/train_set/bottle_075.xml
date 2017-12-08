@@ -1,0 +1,26 @@
+<annotation>
+	<folder>images</folder>
+	<filename>bottle_075.jpg</filename>
+	<path>C:\Users\Bruno\git\pdi-project\db\training003\empty_bottle\images\bottle_075.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>677</width>
+		<height>700</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>emptybottle</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>275</xmin>
+			<ymin>84</ymin>
+			<xmax>393</xmax>
+			<ymax>583</ymax>
+		</bndbox>
+	</object>
+</annotation>

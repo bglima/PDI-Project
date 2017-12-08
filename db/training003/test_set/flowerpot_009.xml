@@ -1,0 +1,26 @@
+<annotation>
+	<folder>images</folder>
+	<filename>flowerpot_009.jpg</filename>
+	<path>C:\Users\Bruno\git\pdi-project\db\training003\flower_pot\images\flowerpot_009.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>499</width>
+		<height>499</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>flowerpot</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>103</xmin>
+			<ymin>225</ymin>
+			<xmax>412</xmax>
+			<ymax>483</ymax>
+		</bndbox>
+	</object>
+</annotation>
