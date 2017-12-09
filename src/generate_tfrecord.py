@@ -2,7 +2,8 @@
 Usage:
   # From tensorflow/models/
   # Create train data:
-  python generate_tfrecord.py --csv_input=data/train_labels.csv  --output_path=train.record
+  python generate_tfrecord.py --csv_input=data/train_labels.csv  --output_path=data/train.record
+  python generate_tfrecord.py --csv_input=training003/test_set/test_set_labels.csv --output_path=training003/test.record --dataset=training003/test_set
 
   # Create test data:
   python generate_tfrecord.py --csv_input=data/test_labels.csv  --output_path=test.record
@@ -31,6 +32,10 @@ FLAGS = flags.FLAGS
 def class_text_to_int(row_label):
     if row_label == 'tire':
         return 1
+    elif row_label == 'emptybottle':
+        return 2
+    elif row_label == 'flowerpot':
+        return 3
     else:
         None
 
@@ -84,7 +89,7 @@ def create_tf_example(group, path):
 
 def main(_):
     writer = tf.python_io.TFRecordWriter(FLAGS.output_path)
-    path = os.path.join(os.getcwd(), '../db/'+FLAGS.dataset)
+    path = os.path.join(os.getcwd(), FLAGS.dataset)
     examples = pd.read_csv(FLAGS.csv_input)
     grouped = split(examples, 'filename')
     for group in grouped:
