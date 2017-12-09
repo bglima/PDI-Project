@@ -32,15 +32,15 @@ from utils import label_map_util
 from utils import visualization_utils as vis_util
 
 # What model to download.
-MODEL_NAME = 'training002/output'
+MODEL_NAME = 'training003/output'
 
 # Path to frozen detection graph. This is the actual model that is used for the object detection.
 PATH_TO_CKPT = MODEL_NAME + '/frozen_inference_graph.pb'
 
 # List of the strings that is used to add correct label for each box.
-PATH_TO_LABELS = os.path.join('training002', 'object-detection.pbtxt')
+PATH_TO_LABELS = os.path.join('training003', 'object-detection.pbtxt')
 
-NUM_CLASSES = 1
+NUM_CLASSES = 3
 
 #%%
 # Loading a (frozen) Tensorflow model into memory
@@ -67,8 +67,11 @@ def load_image_into_numpy_array(image):
 
 # Loading test images into PATH_TO_TEST_IMAGES_DIR.
 PATH_TO_TEST_IMAGES_DIR = 'test_images'
-TEST_IMAGE_PATHS = [ os.path.join(PATH_TO_TEST_IMAGES_DIR, 'image{}.jpg'.format(i)) for i in range(1, 22) ]
 
+all_files = os.listdir(os.path.abspath(PATH_TO_TEST_IMAGES_DIR))
+TEST_IMAGE_PATHS = list(filter(lambda file: file.endswith('.jpg'), all_files)) 
+for i in range( len(TEST_IMAGE_PATHS ) ):
+    TEST_IMAGE_PATHS[i] = PATH_TO_TEST_IMAGES_DIR + '/' + TEST_IMAGE_PATHS[i]
 # Size, in inches, of the output images.
 IMAGE_SIZE = (12, 8)
 
