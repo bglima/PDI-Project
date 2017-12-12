@@ -1,0 +1,26 @@
+######## Script command cheat-sheet
+
+######## Training 004
+# Train network
+python train.py --logdir=training004/results --train_dir=training004/checkpoints --pipeline_config_path=training004/ssd_mobilenet_v1_coco.config
+
+# Evaluate network
+python eval.py --logtostderr --logdir=training004/eval --eval_dir=training004/eval --pipeline_config_path=training004/ssd_mobilenet_v1_coco.config --checkpoint_dir=training004/checkpoints 
+
+# Export inference graph
+python export_inference_graph.py --input_type=image_tensor --pipeline_config_path=training005/faster_rcnn_resnet50_coco.config --trained_checkpoint_prefix=training005/checkpoints/model.ckpt-NUMBER --output_directory=training005/output
+
+#aprox. 1626 good checkpoin
+
+########## Training 005
+# Generate TFRecord from datasets:
+python generate_tfrecord.py --csv_input=training003/test_set/test_set_labels.csv --output_path=training003/test.record --dataset=training003/test_set/
+
+# Train network
+python train.py --train_dir=training005/checkpoints --pipeline_config_path=training005/faster_rcnn_resnet50_coco.config
+
+# Evaluate network
+python eval.py --logtostderr --logdir=training005/res --eval_dir=training005/eval --pipeline_config_path=training005/faster_rcnn_resnet50_coco.config --checkpoint_dir=training005/checkpoints 
+
+# Export inference graph
+python export_inference_graph.py --input_type=image_tensor --pipeline_config_path=training005/faster_rcnn_resnet50_coco.config --trained_checkpoint_prefix=training005/checkpoints/model.ckpt-NUMBER --output_directory=training005/output
