@@ -12,6 +12,7 @@ import sys
 import tarfile
 import tensorflow as tf
 import zipfile
+import time
 
 from collections import defaultdict
 from io import StringIO
@@ -29,7 +30,7 @@ PATH_TO_CKPT = MODEL_NAME + '/frozen_inference_graph.pb'                # Frozen
 PATH_TO_LABELS = os.path.join('training005', 'object-detection.pbtxt')  # Class labels
 NUM_CLASSES = 3                             # Num of classes into your model
 PATH_TO_TEST_IMAGES_DIR = 'test_images'     # Folder containing test images
-MIN_CONFIDENCE = 0.75
+MIN_CONFIDENCE = 0.70
 
 if tf.__version__ != '1.4.0':
   raise ImportError('Please upgrade your tensorflow installation to v1.4.0!')
@@ -87,7 +88,6 @@ image_index = 0
 colors = [(0, 204, 102),    # tire
           (255, 102, 102),  # emptybottle
           (0, 128, 255)]    # flowerpot
-          
 
 #%%
 
@@ -124,10 +124,15 @@ with detection_graph.as_default():
            
             # Expand dimensions since the model expects images to have shape: [1, None, None, 3]
             image_expanded = np.expand_dims(image, axis=0)
+            
             # Actual detection.
+            time_start = time.time()    # Measure time for it
             (boxes, scores, classes, num) = sess.run(
                 [detection_boxes, detection_scores, detection_classes, num_detections],
                 feed_dict={image_tensor: image_expanded})
+                       # Calculate time difference
+            time_end = time.time()
+            print("[INFO] Detection took {:.2f} seconds".format( time_end - time_start ) )
             
             # Creating boxes around detections
             index = 0
@@ -152,6 +157,8 @@ with detection_graph.as_default():
             # Show input and output images
             cv2.imshow('input', image)
             cv2.imshow('output', image_out)
+            
+
             
 # Destroy all windows after quiting program  
 cv2.destroyAllWindows()
