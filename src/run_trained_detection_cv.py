@@ -29,7 +29,7 @@ PATH_TO_CKPT = MODEL_NAME + '/frozen_inference_graph.pb'                # Frozen
 PATH_TO_LABELS = os.path.join('training005', 'object-detection.pbtxt')  # Class labels
 NUM_CLASSES = 3                             # Num of classes into your model
 PATH_TO_TEST_IMAGES_DIR = 'test_images'     # Folder containing test images
-MIN_CONFIDENCE = 0.7
+MIN_CONFIDENCE = 0.75
 
 if tf.__version__ != '1.4.0':
   raise ImportError('Please upgrade your tensorflow installation to v1.4.0!')
@@ -82,10 +82,12 @@ print("[INFO] images loaded successfully...")
 cv2.namedWindow('input', cv2.WINDOW_AUTOSIZE)
 cv2.namedWindow('output', cv2.WINDOW_AUTOSIZE)
 image_index = 0
-# Size, in inches, of the output images.
-IMAGE_SIZE = (12, 8)
 
-COLORS = np.random.uniform(0, 255, size=(len(categories), 3))
+# Defining colors for the bounding boxes
+colors = [(0, 204, 102),    # tire
+          (255, 102, 102),  # emptybottle
+          (0, 128, 255)]    # flowerpot
+          
 
 #%%
 
@@ -116,35 +118,40 @@ with detection_graph.as_default():
                 image_index += 1
 
             # Open the image with updated index
-            image_np = cv2.imread( image_path[image_index] ) 
-            image_np_out = image_np.copy()   # Will contain results
-            (h, w) = image_np.shape[0:2]
+            image = cv2.imread( image_path[image_index] ) 
+            image_out = image.copy()   # Will contain results
+            (h, w) = image.shape[0:2]
            
             # Expand dimensions since the model expects images to have shape: [1, None, None, 3]
-            image_np_expanded = np.expand_dims(image_np, axis=0)
+            image_expanded = np.expand_dims(image, axis=0)
             # Actual detection.
             (boxes, scores, classes, num) = sess.run(
                 [detection_boxes, detection_scores, detection_classes, num_detections],
-                feed_dict={image_tensor: image_np_expanded})
+                feed_dict={image_tensor: image_expanded})
             
             # Creating boxes around detections
             index = 0
             while( scores[0][index] > MIN_CONFIDENCE ):
+                # Getting boxes positions
                 box = boxes[0][index] * np.array([h, w, h, w])
                 (y_start, x_start, y_end, x_end) = box.astype("int")
-                print("[BOX] ", box.astype("int") )
+
                 # Print prediction info
-                class_idx = classes[0][index].astype("int") 
-                label = "{}: {:.2f}%".format( categories[ class_idx - 1 ]['name'], scores[0][index] * 100)
+                class_idx = classes[0][index].astype("int") - 1 # TF classes starts at 1
+                label = "{}: {:.2f}%".format( categories[ class_idx ]['name'], scores[0][index] * 100)
                 print("[INFO] {}".format(label))
                 
                 # Display box
-                cv2.rectangle(image_np_out, (x_start, y_start), (x_end, y_end), COLORS[class_idx - 1], 2)
+                cv2.rectangle(image_out, (x_start, y_start), (x_end, y_end), colors[class_idx], 2)
                 index += 1
                 
+                # Show label
+                y = y_start - 15 if y_start - 15 > 15 else y_start + 15
+                cv2.putText(image_out, label, (x_start, y), 0, 0.5, colors[class_idx], 2)
+                
             # Show input and output images
-            cv2.imshow('input', image_np)
-            cv2.imshow('output', image_np_out)
+            cv2.imshow('input', image)
+            cv2.imshow('output', image_out)
             
 # Destroy all windows after quiting program  
 cv2.destroyAllWindows()
