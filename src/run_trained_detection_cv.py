@@ -157,7 +157,9 @@ with detection_graph.as_default():
             # Show input and output images
             cv2.imshow('input', image)
             cv2.imshow('output', image_out)
-            
+            # Save image output
+            output_path = os.path.splitext(image_path[image_index])[0] + '_out.jpg'
+            cv2.imwrite(output_path, image_out)
 
             
 # Destroy all windows after quiting program  
