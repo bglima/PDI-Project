@@ -1,0 +1,96 @@
+[INFO] checking and loading images...
+[INFO] images loaded successfully...
+[INFO] Started TF Session. Press any key to continue...
+
+[INFO] Detection for image000.jpg took 7.99 seconds
+[INFO] emptybottle: 99.86%
+[INFO] emptybottle: 99.82%
+[INFO] emptybottle: 99.53%
+[INFO] emptybottle: 98.59%
+[INFO] emptybottle: 79.62%
+
+[INFO] Detection for image001.jpg took 2.47 seconds
+[INFO] emptybottle: 99.87%
+
+[INFO] Detection for image002.jpg took 2.39 seconds
+[INFO] flowerpot: 99.74%
+[INFO] flowerpot: 94.51%
+
+[INFO] Detection for image003.jpg took 2.65 seconds
+[INFO] tire: 99.66%
+
+[INFO] Detection for image004.jpg took 2.55 seconds
+[INFO] emptybottle: 94.95%
+
+[INFO] Detection for image005.jpg took 2.57 seconds
+[INFO] flowerpot: 99.95%
+[INFO] flowerpot: 99.93%
+[INFO] flowerpot: 99.91%
+[INFO] flowerpot: 99.88%
+[INFO] flowerpot: 99.79%
+
+[INFO] Detection for image006.jpg took 2.33 seconds
+[INFO] emptybottle: 99.90%
+
+[INFO] Detection for image007.jpg took 2.60 seconds
+[INFO] tire: 99.78%
+
+[INFO] Detection for image008.jpg took 2.48 seconds
+[INFO] flowerpot: 99.91%
+
+[INFO] Detection for image009.jpg took 2.64 seconds
+[INFO] emptybottle: 99.94%
+[INFO] emptybottle: 95.41%
+[INFO] emptybottle: 94.09%
+
+[INFO] Detection for image010.jpg took 2.59 seconds
+[INFO] tire: 99.83%
+[INFO] tire: 99.58%
+
+[INFO] Detection for image011.jpg took 2.54 seconds
+[INFO] flowerpot: 99.80%
+[INFO] flowerpot: 99.77%
+[INFO] flowerpot: 99.62%
+[INFO] flowerpot: 99.60%
+[INFO] flowerpot: 99.42%
+[INFO] flowerpot: 99.29%
+[INFO] flowerpot: 98.89%
+[INFO] flowerpot: 96.48%
+[INFO] flowerpot: 61.42%
+
+[INFO] Detection for image012.jpg took 2.47 seconds
+[INFO] emptybottle: 99.89%
+
+[INFO] Detection for image013.jpg took 2.62 seconds
+[INFO] tire: 98.84%
+
+[INFO] Detection for image014.jpg took 2.51 seconds
+[INFO] emptybottle: 97.79%
+
+[INFO] Detection for image015.jpg took 2.41 seconds
+[INFO] tire: 99.90%
+[INFO] tire: 99.71%
+[INFO] tire: 99.67%
+[INFO] tire: 99.59%
+
+[INFO] Detection for image016.jpg took 2.46 seconds
+[INFO] flowerpot: 99.86%
+
+[INFO] Detection for image017.jpg took 2.34 seconds
+[INFO] tire: 98.14%
+[INFO] tire: 81.31%
+
+[INFO] Detection for image018.jpg took 2.53 seconds
+[INFO] tire: 99.28%
+[INFO] tire: 98.99%
+
+[INFO] Detection for image019.jpg took 2.49 seconds
+[INFO] tire: 99.67%
+[INFO] tire: 98.43%
+[INFO] flowerpot: 95.67%
+[INFO] flowerpot: 66.16%
+
+[INFO] Detection for image020.jpg took 2.49 seconds
+[INFO] tire: 87.61%
+[INFO] tire: 71.66%
+[SYS] Ended program successfuly.
