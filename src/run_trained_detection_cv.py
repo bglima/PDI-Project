@@ -31,6 +31,8 @@ PATH_TO_LABELS = os.path.join('training005', 'object-detection.pbtxt')  # Class 
 NUM_CLASSES = 3                             # Num of classes into your model
 PATH_TO_TEST_IMAGES_DIR = 'test_images'     # Folder containing test images
 MIN_CONFIDENCE = 0.70
+SAVE_OUTPUT = True
+SAVE_OUTPUT_DIR = os.path.join(PATH_TO_TEST_IMAGES_DIR, 'output/')
 
 if tf.__version__ != '1.4.0':
   raise ImportError('Please upgrade your tensorflow installation to v1.4.0!')
@@ -38,6 +40,9 @@ if tf.__version__ != '1.4.0':
 sys.path.append("..")  
 from utils import label_map_util
 from utils import visualization_utils as vis_util
+
+if( SAVE_OUTPUT and not os.path.exists(SAVE_OUTPUT_DIR)):
+    os.makedirs(SAVE_OUTPUT_DIR) 
 
 def load_image_into_numpy_array(image):
   (im_width, im_height) = image.size
@@ -157,10 +162,13 @@ with detection_graph.as_default():
             # Show input and output images
             cv2.imshow('input', image)
             cv2.imshow('output', image_out)
-            # Save image output
-            output_path = os.path.splitext(image_path[image_index])[0] + '_out.jpg'
-            cv2.imwrite(output_path, image_out)
-
             
+            # Save image output
+            if( SAVE_OUTPUT ):
+                image_name = os.path.basename(image_path[image_index])
+                pure_name = os.path.splitext(image_name)[0]
+                output_path =  SAVE_OUTPUT_DIR + pure_name + '_out.jpg'
+                cv2.imwrite(output_path, image_out)
+       
 # Destroy all windows after quiting program  
 cv2.destroyAllWindows()
