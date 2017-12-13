@@ -25,14 +25,13 @@ import cv2
 
 #%%
 
-MODEL_NAME = 'training005/output'            # What model is going to be used
-PATH_TO_CKPT = MODEL_NAME + '/frozen_inference_graph.pb'                # Frozen detection graph
-PATH_TO_LABELS = os.path.join('training005', 'object-detection.pbtxt')  # Class labels
+PATH_TO_CKPT = 'training003/output_v4_4286/frozen_inference_graph.pb'                # Frozen detection graph
+PATH_TO_LABELS = os.path.join('training003', 'object-detection.pbtxt')  # Class labels
 NUM_CLASSES = 3                             # Num of classes into your model
 PATH_TO_TEST_IMAGES_DIR = 'test_images'     # Folder containing test images
-MIN_CONFIDENCE = 0.70
-SAVE_OUTPUT = True
-SAVE_OUTPUT_DIR = os.path.join(PATH_TO_TEST_IMAGES_DIR, 'output/')
+MIN_CONFIDENCE = 0.60
+SAVE_OUTPUT = True 
+SAVE_OUTPUT_DIR = os.path.join(PATH_TO_TEST_IMAGES_DIR, 'output_v4_4286/')
 
 if tf.__version__ != '1.4.0':
   raise ImportError('Please upgrade your tensorflow installation to v1.4.0!')
@@ -91,7 +90,7 @@ image_index = 0
 
 # Defining colors for the bounding boxes
 colors = [(0, 204, 102),    # tire
-          (255, 102, 102),  # emptybottle
+          (255, 51, 102),  # emptybottle
           (0, 128, 255)]    # flowerpot
 
 #%%
@@ -108,19 +107,31 @@ with detection_graph.as_default():
     detection_classes = detection_graph.get_tensor_by_name('detection_classes:0')
     num_detections = detection_graph.get_tensor_by_name('num_detections:0')
     print("[INFO] Started TF Session. Press any key to continue...")
+    
+    # As the increment is automatic when saving batch
+    if ( SAVE_OUTPUT ): 
+                image_index = -1
+    
     while True: 
-            # Check if key was pressed
+            # Always read keyboard
             key = cv2.waitKey(50)
-            if (key == -1) : continue
-            
-            # Update image index
-            elif ( key == ord('q') ): 
-                cv2.destroyAllWindows()
-                break
-            elif ( key == ord('a') and image_index > 0 ) : 
-                image_index -= 1
-            elif ( key == ord('d') and image_index < len(image_path)-1 ):
+          
+            # Save batch output mode
+            if ( SAVE_OUTPUT ): 
                 image_index += 1
+                if ( key == ord('q') or image_index == len(image_path) ):
+                    break
+            else:
+                # Check if key was pressed
+                if (key == -1) : continue
+                
+                # Update image index
+                elif ( key == ord('q') ): 
+                    break
+                elif ( key == ord('a') and image_index > 0 ) : 
+                    image_index -= 1
+                elif ( key == ord('d') and image_index < len(image_path)-1 ):
+                    image_index += 1
 
             # Open the image with updated index
             image = cv2.imread( image_path[image_index] ) 
@@ -137,7 +148,8 @@ with detection_graph.as_default():
                 feed_dict={image_tensor: image_expanded})
                        # Calculate time difference
             time_end = time.time()
-            print("[INFO] Detection took {:.2f} seconds".format( time_end - time_start ) )
+            image_name = os.path.basename(image_path[image_index])
+            print("\n[INFO] Detection for {} took {:.2f} seconds".format(image_name, time_end - time_start ) )
             
             # Creating boxes around detections
             index = 0
@@ -165,10 +177,11 @@ with detection_graph.as_default():
             
             # Save image output
             if( SAVE_OUTPUT ):
-                image_name = os.path.basename(image_path[image_index])
                 pure_name = os.path.splitext(image_name)[0]
                 output_path =  SAVE_OUTPUT_DIR + pure_name + '_out.jpg'
                 cv2.imwrite(output_path, image_out)
-       
+                
+# Show that job has finished
+print("[SYS] Ended program successfuly.")    
 # Destroy all windows after quiting program  
 cv2.destroyAllWindows()
