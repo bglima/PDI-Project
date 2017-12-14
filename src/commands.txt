@@ -23,4 +23,29 @@ python train.py --train_dir=training005/checkpoints --pipeline_config_path=train
 python eval.py --logtostderr --logdir=training005/res --eval_dir=training005/eval --pipeline_config_path=training005/faster_rcnn_resnet50_coco.config --checkpoint_dir=training005/checkpoints 
 
 # Export inference graph
-python export_inference_graph.py --input_type=image_tensor --pipeline_config_path=training005/faster_rcnn_resnet50_coco.config --trained_checkpoint_prefix=training005/checkpoints/model.ckpt-NUMBER --output_directory=training005/output
+python export_inference_graph.py --input_type=image_tensor --pipeline_config_path=training003/faster_rcnn_resnet50_coco.config --trained_checkpoint_prefix=training005/checkpoints/model.ckpt-3553 --output_directory=training003/output_v4
+
+######## Training 006
+# Train network
+python train.py --logdir=training006/checkpoints --train_dir=training006/checkpoints --pipeline_config_path=training006/ssd_mobilenet_v1_coco.config
+
+# Evaluate network
+python eval.py --logdir=training006/res --eval_dir=training006/eval --pipeline_config_path=training006/ssd_mobilenet_v1_coco.config --checkpoint_dir=training006/checkpoints 
+
+# Export inference graph
+python export_inference_graph.py --input_type=image_tensor --pipeline_config_path=training006/ssd_mobilenet_v1_coco.config --trained_checkpoint_prefix=training006/checkpoints/model.ckpt-2000 --output_directory=training006/output_v1_2000
+
+######## Memory Issues Sol
+# https://github.com/tensorflow/models/issues/1817
+# https://github.com/tensorflow/models/issues/1854
+# https://github.com/tensorflow/models/issues/2502
+
+######## About evaluation
+# https://github.com/tensorflow/models/issues/2225
+# https://github.com/google/seq2seq/blob/master/docs/training.md
+
+######## About data augmentation
+# https://stackoverflow.com/questions/44906317/what-are-possible-values-for-data-augmentation-options-in-the-tensorflow-object
+
+######## Tutorialzinho massa
+#  https://blog.algorithmia.com/deep-dive-into-object-detection-with-open-images-using-tensorflow/
