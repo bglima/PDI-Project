@@ -1,0 +1,71 @@
+[INFO] checking and loading images...
+[INFO] images loaded successfully...
+[INFO] Started TF Session. Press any key to continue...
+
+[INFO] Detection for image000.jpg took 2.09 seconds
+[INFO] emptybottle: 98.04%
+
+[INFO] Detection for image001.jpg took 0.03 seconds
+
+[INFO] Detection for image002.jpg took 0.02 seconds
+[INFO] flowerpot: 99.37%
+
+[INFO] Detection for image003.jpg took 0.05 seconds
+[INFO] flowerpot: 95.62%
+
+[INFO] Detection for image004.jpg took 0.02 seconds
+[INFO] flowerpot: 94.02%
+
+[INFO] Detection for image005.jpg took 0.05 seconds
+[INFO] flowerpot: 78.00%
+
+[INFO] Detection for image006.jpg took 0.02 seconds
+[INFO] flowerpot: 92.51%
+[INFO] emptybottle: 79.10%
+
+[INFO] Detection for image007.jpg took 0.02 seconds
+[INFO] flowerpot: 77.32%
+
+[INFO] Detection for image008.jpg took 0.02 seconds
+[INFO] flowerpot: 98.36%
+
+[INFO] Detection for image009.jpg took 0.02 seconds
+[INFO] flowerpot: 91.59%
+
+[INFO] Detection for image010.jpg took 0.02 seconds
+[INFO] flowerpot: 92.79%
+[INFO] tire: 66.33%
+
+[INFO] Detection for image011.jpg took 0.05 seconds
+[INFO] flowerpot: 91.65%
+[INFO] flowerpot: 90.00%
+[INFO] flowerpot: 64.65%
+
+[INFO] Detection for image012.jpg took 0.05 seconds
+
+[INFO] Detection for image013.jpg took 0.03 seconds
+[INFO] flowerpot: 98.73%
+
+[INFO] Detection for image014.jpg took 0.02 seconds
+[INFO] flowerpot: 76.40%
+
+[INFO] Detection for image015.jpg took 0.03 seconds
+[INFO] flowerpot: 92.36%
+[INFO] flowerpot: 78.66%
+[INFO] tire: 68.71%
+
+[INFO] Detection for image016.jpg took 0.03 seconds
+[INFO] flowerpot: 99.33%
+
+[INFO] Detection for image017.jpg took 0.03 seconds
+[INFO] flowerpot: 87.73%
+
+[INFO] Detection for image018.jpg took 0.03 seconds
+
+[INFO] Detection for image019.jpg took 0.02 seconds
+[INFO] flowerpot: 83.89%
+[INFO] flowerpot: 73.65%
+[INFO] flowerpot: 68.41%
+
+[INFO] Detection for image020.jpg took 0.02 seconds
+[SYS] Ended program successfuly.
