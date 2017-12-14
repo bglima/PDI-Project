@@ -1,0 +1,94 @@
+[INFO] checking and loading images...
+[INFO] images loaded successfully...
+[INFO] Started TF Session. Press any key to continue...
+
+[INFO] Detection for image000.jpg took 4.40 seconds
+[INFO] emptybottle: 99.43%
+[INFO] emptybottle: 99.14%
+[INFO] emptybottle: 96.05%
+[INFO] emptybottle: 92.97%
+[INFO] emptybottle: 80.93%
+
+[INFO] Detection for image001.jpg took 0.75 seconds
+[INFO] emptybottle: 71.64%
+
+[INFO] Detection for image002.jpg took 0.71 seconds
+[INFO] flowerpot: 96.98%
+
+[INFO] Detection for image003.jpg took 0.78 seconds
+[INFO] tire: 98.57%
+[INFO] tire: 72.19%
+
+[INFO] Detection for image004.jpg took 0.75 seconds
+[INFO] emptybottle: 96.34%
+[INFO] tire: 87.89%
+[INFO] tire: 60.27%
+
+[INFO] Detection for image005.jpg took 0.75 seconds
+[INFO] flowerpot: 98.65%
+[INFO] flowerpot: 98.52%
+[INFO] flowerpot: 98.38%
+[INFO] flowerpot: 97.71%
+[INFO] flowerpot: 95.86%
+
+[INFO] Detection for image006.jpg took 0.69 seconds
+[INFO] emptybottle: 99.76%
+
+[INFO] Detection for image007.jpg took 0.78 seconds
+[INFO] tire: 99.57%
+
+[INFO] Detection for image008.jpg took 0.75 seconds
+[INFO] flowerpot: 98.50%
+
+[INFO] Detection for image009.jpg took 0.78 seconds
+[INFO] emptybottle: 98.54%
+[INFO] emptybottle: 82.40%
+
+[INFO] Detection for image010.jpg took 0.78 seconds
+[INFO] tire: 98.92%
+[INFO] tire: 98.86%
+
+[INFO] Detection for image011.jpg took 0.77 seconds
+[INFO] flowerpot: 98.48%
+[INFO] flowerpot: 96.39%
+[INFO] flowerpot: 96.16%
+[INFO] flowerpot: 95.26%
+[INFO] flowerpot: 94.18%
+[INFO] flowerpot: 89.69%
+[INFO] flowerpot: 79.83%
+[INFO] flowerpot: 62.70%
+
+[INFO] Detection for image012.jpg took 0.72 seconds
+
+[INFO] Detection for image013.jpg took 0.77 seconds
+[INFO] tire: 98.71%
+
+[INFO] Detection for image014.jpg took 0.73 seconds
+[INFO] emptybottle: 90.91%
+
+[INFO] Detection for image015.jpg took 0.75 seconds
+[INFO] tire: 99.41%
+[INFO] tire: 99.22%
+[INFO] tire: 98.92%
+[INFO] tire: 96.26%
+
+[INFO] Detection for image016.jpg took 0.75 seconds
+[INFO] flowerpot: 98.28%
+
+[INFO] Detection for image017.jpg took 0.70 seconds
+[INFO] tire: 89.45%
+
+[INFO] Detection for image018.jpg took 0.77 seconds
+[INFO] tire: 98.81%
+[INFO] tire: 92.25%
+
+[INFO] Detection for image019.jpg took 0.77 seconds
+[INFO] tire: 99.21%
+[INFO] tire: 90.99%
+[INFO] tire: 90.76%
+[INFO] tire: 65.97%
+
+[INFO] Detection for image020.jpg took 0.73 seconds
+[INFO] tire: 79.32%
+[INFO] tire: 79.13%
+[SYS] Ended program successfuly.
