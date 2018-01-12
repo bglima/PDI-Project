@@ -7,14 +7,16 @@ Created on Thu Jan 11 15:33:53 2018
 
 import os
 import cv2
+from random import random
 import numpy as np
 import imutils as iu
 
-INPUT_PATHS = [ '../db/training004/flowerpot/', 
-            '../db/training004/tire/' ]
+
+INPUT_PATHS = [ '../db/training007/flowerpot/' ] 
+            #'../db/training004/tire/' ]
             #'../db/training004/flowerpot/',
             #'../db/training004/bottle/']    
-AUGMENT_OPTIONS = [ 'ROTATION' ]
+AUGMENT_OPTIONS = [ 'NOISE', 'ROTATION', 'SHEAR' ]
 VALID_TYPES = ('.jpg', '.gif', '.png', '.tga')
 TARGET_SIZE = (300, 300)
 
@@ -48,6 +50,20 @@ def process( aug_type, img_name, img, out_dir ):
             img_out_name = out_dir + os.path.splitext(img_name)[0] + 'shearV' + str(shear_factor) + '.jpg'
             print('Writing %s ...' % (img_out_name) ) 
             cv2.imwrite(img_out_name, img_out)
+            
+    # SALT AND PEPPER
+    elif aug_type == 'NOISE':     
+        # Creating noise based on image
+        gaussian_noise = img.copy()
+        m = (20, 20, 20)
+        s = (20, 20, 20)
+        cv2.randn(gaussian_noise, m, s)   # Mean 0 and sigma 150
+        # Adding noise to original image
+        img_out = img + gaussian_noise
+        # Saving it
+        img_out_name = out_dir + os.path.splitext(img_name)[0] + 'noise.jpg'
+        print('Writing %s ...' % (img_out_name) ) 
+        cv2.imwrite(img_out_name, img_out)
     else:
         raise Exception('%s augmentation command not known.')
 
