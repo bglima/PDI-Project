@@ -10,18 +10,68 @@ import cv2
 from random import random
 import numpy as np
 import imutils as iu
+from lxml import etree
+from io import StringIO
 
-
-INPUT_PATHS = [ '../db/training007/flowerpot/' ] 
-            #'../db/training004/tire/' ]
-            #'../db/training004/flowerpot/',
-            #'../db/training004/bottle/']    
+INPUT_PATHS = [ 
+            '../db/training007/emptybottle/', 
+            '../db/training007/tire/', 
+            '../db/training007/flowerpot/' 
+            ]
 AUGMENT_OPTIONS = [ 'NOISE', 'ROTATION', 'SHEAR' ]
 VALID_TYPES = ('.jpg', '.gif', '.png', '.tga')
 TARGET_SIZE = (300, 300)
 
+# Override original images with TARGET_SIZE images, keeping aspect ratio
+# Does not consider annotations
+def resize_datasets():
+    # Iterate over folders
+    for input_dir in INPUT_PATHS:
+        img_dir = os.path.join(input_dir, 'images/')            
+        
+        # Check if folders exist
+        if not os.path.exists(img_dir):
+            raise Exception('%s dir not found.'% (img_dir) ) 
+    
+        # Load names from img directory            
+        for img_name in os.listdir(img_dir):
+            # Load image from path
+            img_path = os.path.join(img_dir, img_name)
+            img = cv2.imread(img_path)
+    
+             # Read old size
+            old_width, old_height = img.shape[1], img.shape[0]
+            aspect_ratio = float(old_width) / float(old_height)
+            
+            # Check if size is already ok
+            if old_width == TARGET_SIZE[0] and old_height == TARGET_SIZE[1]:
+                print(' %s already satisfies dimension requirements.' % img_name )
+                continue
+            # Resize max dimension to 300, keeping ratio
+            elif old_width > old_height:
+                new_width = TARGET_SIZE[0]
+                new_height = int( float(new_width) / float(aspect_ratio) )
+                
+            else:
+                new_height = TARGET_SIZE[1]                                
+                new_width = int( float(new_height) * float(aspect_ratio) )
+            
+            # Find borders
+            delta_w = TARGET_SIZE[0] - new_width
+            delta_h = TARGET_SIZE[1] - new_height
+            top, bottom = delta_h//2, delta_h-(delta_h//2)
+            left, right = delta_w//2, delta_w-(delta_w//2)
+            
+            # Resizing and creating a bordered version
+            img = cv2.resize(img, (new_width, new_height), interpolation = cv2.INTER_CUBIC )
+            img_w_borders = cv2.copyMakeBorder(img, top, bottom, left, right, cv2.BORDER_CONSTANT)
+            
+            # Saving
+            print('Resizing %s and saving' % img_name)
+            cv2.imwrite(img_dir+img_name, img_w_borders)
+
 # Augmentation process for each iamge
-def process( aug_type, img_name, img, out_dir ):   
+def process( aug_type, img_name, img, ann_tree, out_dir, ann_dir ):   
     # ROTATION
     if aug_type == 'ROTATION':
         # 3 Rotations of 90 deg
@@ -66,41 +116,7 @@ def process( aug_type, img_name, img, out_dir ):
         cv2.imwrite(img_out_name, img_out)
     else:
         raise Exception('%s augmentation command not known.')
-
     print('All right!')
-
-# Override original images with TARGET_SIZE images, keeping aspect ratio
-# Does not consider annotations
-def resize_datasets():
-    # Iterate over folders
-    for input_dir in INPUT_PATHS:
-        img_dir = os.path.join(input_dir, 'images/')            
-        
-    # Check if folders exist
-    if not os.path.exists(img_dir):
-        raise Exception('%s dir not found.'% (img_dir) ) 
-
-    # Load names from img directory            
-    for img_name in os.listdir(img_dir):
-        # Load image from path
-        img_path = os.path.join(img_dir, img_name)
-        img = cv2.imread(img_path)
-
-         # Resize the image and override it
-        width, height = img.shape[1], img.shape[0]
-        aspect_ratio = float(width) / float(height)
-        
-        # Resize max dimension to 300, keeping ratio
-        if width > height:
-            new_width = TARGET_SIZE[0]
-            new_height = int( float(new_width) / float(aspect_ratio) )
-        else:
-            new_height = TARGET_SIZE[1]                                
-            new_width = int( float(new_height) * float(aspect_ratio) )
-            
-        img = cv2.resize(img, (new_width, new_height), interpolation = cv2.INTER_CUBIC )
-        print('Resizing %s and saving' % img_name)
-        cv2.imwrite(img_dir+img_name, img)
 
 # Process each image and store its results in INPUT_PATH/augmented folder.
 def augment_datasets():
@@ -126,17 +142,24 @@ def augment_datasets():
             img_path = os.path.join(img_dir, img_name)
             img = cv2.imread(img_path)
             
+            # Annotation for current image
+            ann_path = os.path.join(ann_dir, os.path.splitext(img_name)[0] + '.xml' )
+            ann_tree = etree.parse(ann_path)
+                       
             # Check if its a valid image
             if (img is not None) and (img_path.lower().endswith(VALID_TYPES)):
-                # Save current image to output folder
+                # Save current image and annotation to output folder
                 cv2.imwrite(out_dir+img_name, img)
-            
+                folder = ann_tree.getroot().find('folder')
+                print('Found folder name: {}' % folder)
+                
                 # Augmentation option from each image goes here
-                for arg in AUGMENT_OPTIONS: process(arg, img_name, img, out_dir)
+                for arg in AUGMENT_OPTIONS: process(arg, img_name, img, ann_tree, out_dir, ann_dir)
 
 def main():
-    augment_datasets()
-    
+     resize_datasets()
+        
 if __name__ == '__main__':
     main()
     
+    #%%
