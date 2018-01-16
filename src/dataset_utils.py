@@ -15,9 +15,9 @@ from io import StringIO
 import math
 
 INPUT_PATHS = [ 
-            '../db/training007/emptybottle/'#, 
-            #'../db/training007/tire/', 
-            #'../db/training007/flowerpot/' 
+            '../db/training007/emptybottle/', 
+            '../db/training007/tire/', 
+            '../db/training007/flowerpot/' 
             ]
 AUGMENT_OPTIONS = [ 'NOISE', 'ROTATION' ]
 VALID_TYPES = ('.jpg', '.gif', '.png', '.tga')
@@ -48,9 +48,10 @@ def resize_datasets():
             # Check if size is already ok
             if old_width == TARGET_SIZE[0] and old_height == TARGET_SIZE[1]:
                 print(' %s already satisfies dimension requirements.' % img_name )
-                continue
+               # continue
+               
             # Resize max dimension to 300, keeping ratio
-            elif old_width > old_height:
+            if old_width > old_height:
                 new_width = TARGET_SIZE[0]
                 new_height = int( float(new_width) / float(aspect_ratio) )
                 
@@ -80,6 +81,7 @@ def save_to_ann( ann_tree, ann_path, img_out_path, xmin, ymin, xmax, ymax ):
     data_ymin = ann_tree.getroot().find('object/bndbox/ymin')
     data_xmax = ann_tree.getroot().find('object/bndbox/xmax')
     data_ymax = ann_tree.getroot().find('object/bndbox/ymax')
+    data_diffucult = ann_tree.getroot().find('object/difficult')
 
     # Debugging data 
     print('Annotation from %s: %s %s %s %s' % (data_path.text, 
@@ -93,6 +95,7 @@ def save_to_ann( ann_tree, ann_path, img_out_path, xmin, ymin, xmax, ymax ):
     data_ymin.text = str(ymin)
     data_xmax.text = str(xmax)
     data_ymax.text = str(ymax)
+    data_difficult.text = '1'
     
     # Saving in ann_path specified directory
     ann_tree.write(ann_path)
@@ -297,7 +300,8 @@ def augment_datasets():
                 for arg in AUGMENT_OPTIONS: process(arg, img_name, img, ann_tree, out_dir, ann_out_dir)
 
 def main():
-     augment_datasets()
+     #augment_datasets()
+     resize_datasets()
         
 if __name__ == '__main__':
     main()
