@@ -29,7 +29,7 @@ def xml_to_csv(path):
 
 
 def main():
-    dataset = 'training003'
+    dataset = 'training007'
     
     for directory in ['train_set', 'test_set']:
         image_path = '../db/' + dataset + '/{}'.format(directory)

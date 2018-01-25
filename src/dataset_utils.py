@@ -19,7 +19,7 @@ INPUT_PATHS = [
             '../db/training007/tire/', 
             '../db/training007/flowerpot/' 
             ]
-AUGMENT_OPTIONS = [ 'NOISE', 'ROTATION' ]
+AUGMENT_OPTIONS = [ ]
 VALID_TYPES = ('.jpg', '.gif', '.png', '.tga')
 TARGET_SIZE = (300, 300)
 OX, OY = TARGET_SIZE[0] // 2, TARGET_SIZE[1] // 2
@@ -48,7 +48,7 @@ def resize_datasets():
             # Check if size is already ok
             if old_width == TARGET_SIZE[0] and old_height == TARGET_SIZE[1]:
                 print(' %s already satisfies dimension requirements.' % img_name )
-               # continue
+                continue
                
             # Resize max dimension to 300, keeping ratio
             if old_width > old_height:
@@ -77,11 +77,12 @@ def resize_datasets():
 def save_to_ann( ann_tree, ann_path, img_out_path, xmin, ymin, xmax, ymax ):
     # Getting elments from XML
     data_path = ann_tree.getroot().find('path')
+    data_filename = ann_tree.getroot().find('filename')
     data_xmin = ann_tree.getroot().find('object/bndbox/xmin')
     data_ymin = ann_tree.getroot().find('object/bndbox/ymin')
     data_xmax = ann_tree.getroot().find('object/bndbox/xmax')
     data_ymax = ann_tree.getroot().find('object/bndbox/ymax')
-    data_diffucult = ann_tree.getroot().find('object/difficult')
+    data_difficult = ann_tree.getroot().find('object/difficult')
 
     # Debugging data 
     print('Annotation from %s: %s %s %s %s' % (data_path.text, 
@@ -95,7 +96,7 @@ def save_to_ann( ann_tree, ann_path, img_out_path, xmin, ymin, xmax, ymax ):
     data_ymin.text = str(ymin)
     data_xmax.text = str(xmax)
     data_ymax.text = str(ymax)
-    data_difficult.text = '1'
+    data_filename.text = os.path.basename( img_out_path )
     
     # Saving in ann_path specified directory
     ann_tree.write(ann_path)
@@ -294,14 +295,16 @@ def augment_datasets():
             if (img is not None) and (img_path.lower().endswith(VALID_TYPES)):
                 # Save current image and annotation to output folder
                 cv2.imwrite(out_dir+img_name, img)
+                ann_tree.getroot().find('path').text = os.path.abspath( out_dir+img_name )
                 ann_tree.write(ann_out_dir + os.path.splitext(img_name)[0] + '.xml')
                 
                 # Augmentation option from each image goes here
                 for arg in AUGMENT_OPTIONS: process(arg, img_name, img, ann_tree, out_dir, ann_out_dir)
 
 def main():
-     #augment_datasets()
-     resize_datasets()
+    #resize_datasets() 
+    augment_datasets()
+     
         
 if __name__ == '__main__':
     main()

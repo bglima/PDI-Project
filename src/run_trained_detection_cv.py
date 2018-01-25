@@ -25,13 +25,13 @@ import cv2
 
 #%%
 
-PATH_TO_CKPT = 'training006/output_v1_1922/frozen_inference_graph.pb'                # Frozen detection graph
-PATH_TO_LABELS = os.path.join('training006', 'object-detection.pbtxt')  # Class labels
+PATH_TO_CKPT = 'models/mobilenet_v1/output_9707/frozen_inference_graph.pb'                # Frozen detection graph
+PATH_TO_LABELS = 'data/label_map.pbtxt'     # Class labels
 NUM_CLASSES = 3                             # Num of classes into your model
 PATH_TO_TEST_IMAGES_DIR = 'test_images'     # Folder containing test images
-MIN_CONFIDENCE = 0.60
-SAVE_OUTPUT = True 
-SAVE_OUTPUT_DIR = os.path.join(PATH_TO_TEST_IMAGES_DIR, 'output_v1_1922/')
+MIN_CONFIDENCE = 0.70
+SAVE_OUTPUT = False 
+SAVE_OUTPUT_DIR = os.path.join(PATH_TO_TEST_IMAGES_DIR, 'mobilenet_v1_9707/')
 
 if tf.__version__ != '1.4.0':
   raise ImportError('Please upgrade your tensorflow installation to v1.4.0!')

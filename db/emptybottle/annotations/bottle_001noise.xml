@@ -1,0 +1,14 @@
+<annotation>
+	<folder>images</folder>
+	<filename>bottle_001noise.jpg</filename>
+	<path>C:\Users\bglim\git\PDI-Project\db\training007\emptybottle\augmented\images\bottle_001noise.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>300</width>
+		<height>300</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+</annotation>

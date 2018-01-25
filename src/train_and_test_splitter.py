@@ -84,10 +84,10 @@ args = vars(ap.parse_args())
 
 #%%
 args = {}
-args["images_dir"] = '../db/training003/tire/images'
-args["annotations_dir"] = '../db/training003/tire/annotations'
-args["output_dir"] = '../db/training003/'
-args["split"] = 0.7
+args["images_dir"] = '../db/training007/flowerpot/images'
+args["annotations_dir"] = '../db/training007/flowerpot/annotations'
+args["output_dir"] = '../db/training007/'
+args["split"] = 0.85
 
 imgs_dir = args["images_dir"]
 ann_dir = args["annotations_dir"]
