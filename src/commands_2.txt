@@ -1,0 +1,90 @@
+Test_set: 80 images
+Train_set: 439 images
+
+
+
+https://github.com/tensorflow/models/issues/1696
+https://stackoverflow.com/questions/38265061/tensorflow-missing-checkpoint-files-does-saver-only-allow-for-keeping-5-check
+
+##### Evaluate from Checkpoints #####
+--eval_from_ckpt=NUMBER
+
+######## Generate TFRecord ###########
+
+python generate_tfrecord.py --csv_input=csv/test_set_labels.csv --output_path=tfrecord/test.record --dataset=test_set
+
+######################################
+
+# Evaluation configuration
+eval_config: {
+   num_examples: 80
+   num_visualizations: 80
+   eval_interval_secs: 90
+}
+	
+############# MOBILENET ################
+
+Tr: MIN64 CPU
+Ev: PowerShell GPU 0.6
+TB: GPU PowerShell
+
+# Execute training
+python train.py `
+    --logtostderr `
+    --pipeline_config_path=models/mobilenet_v1/ssd_mobilenet_v1_coco.config `
+    --train_dir=models/mobilenet_v1/train
+
+# Execute evaluation
+python eval.py `
+	--logtostderr `
+	--pipeline_config_path=models/mobilenet_v1/ssd_mobilenet_v1_coco.config `
+	--checkpoint_dir=models/mobilenet_v1/train `
+	--eval_dir=models/mobilenet_v1/eval `
+	--eval_from_ckpt=0
+	
+
+# Run tensorboard
+tensorboard --logdir=models/mobilenet_v1/
+
+# Export inference graph
+python export_inference_graph.py `
+	--input_type=image_tensor `
+	--pipeline_config_path=models/mobilenet_v1/ssd_mobilenet_v1_coco.config `
+	--trained_checkpoint_prefix=models/mobilenet_v1/train/model.ckpt-9707 `
+	--output_directory=models/mobilenet_v1/output_9707
+	
+############ RESNET 50 ##################
+
+### Train - GPU - 0.3 - MIN64
+### Eval - GPU - 0.3 - PowerShell
+### TensorBoard - CPU - PowerShell
+
+# 0.004 learning rate till 7741
+# 0.0004 after
+
+# Execute training
+python train.py `
+    --logtostderr `
+    --pipeline_config_path=models/frcnn_resnet50/faster_rcnn_resnet50_coco.config `
+    --train_dir=models/frcnn_resnet50/train
+
+# Execute evaluation
+python eval.py `
+	--logtostderr `
+	--pipeline_config_path=models/frcnn_resnet50/faster_rcnn_resnet50_coco.config `
+	--checkpoint_dir=models/frcnn_resnet50/train `
+	--eval_dir=models/frcnn_resnet50/eval `
+	--eval_from_ckpt=8148
+
+# Run tensorboard
+tensorboard --logdir=models/frcnn_resnet50/
+
+# Export graph
+python export_inference_graph.py `
+	--input_type=image_tensor `
+	--pipeline_config_path=models/frcnn_resnet50/faster_rcnn_resnet50_coco.config `
+	--trained_checkpoint_prefix=models/frcnn_resnet50//train/model.ckpt-8148 `
+	--output_directory=models/frcnn_resnet50/output_8148
+
+
+	
